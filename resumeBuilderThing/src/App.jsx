@@ -1,11 +1,9 @@
-import { useState } from "react";
-import LeftBox from "./leftBox";
-import './resetAndMore.css';
+import ResumePage from "./ResumePage";
 export default function App(){
 
   return(
     <>
-<LeftBox></LeftBox>
+<ResumePage></ResumePage>
     </>
   );
 }
