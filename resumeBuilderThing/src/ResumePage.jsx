@@ -6,7 +6,9 @@ export default function ResumePage(){
         <>
         <div className="encloser">
             <div className="page">
-            <h1 className="name">Name here</h1>
+            <div className="topHalf">
+                <h1 className="name">Name here</h1>
+            </div>
             </div>
         </div>
         <textarea name="inputbox" id="inputbox"></textarea>
