@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,500;1,500&family=Jersey+10&display=swap');
 
 /* 1. Use a more-intuitive box-sizing model */
@@ -55,6 +54,17 @@ text-wrap: balance;
 #root, #__next {
 isolation: isolate;
 }
+/* resetting the thing for lists and its items */
+ul, ol {
+    /* Use padding to create the indentation. */
+    padding-left: 1.5rem;
+    /* This rule is not needed anymore if you have padding */
+    list-style-position: outside;
+}
+li {
+    /* Ensures list items are not squeezed together */
+    margin-bottom: 0.5rem;
+}
 
 .encloser{
     width: 100vw;
@@ -73,6 +83,9 @@ background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' heigh
     background-color: white;
     height: 90vh;
     width: 35vw;
+    /* Use flexbox for page sections */
+    display: flex;
+    flex-direction: column;
 }
 #inputbox{
     font-family: "Google Sans Code";
@@ -88,6 +101,7 @@ background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' heigh
     color: black;
 }
 .topHalf{
+    width: 100%;
     padding: 15px 20px 10px;
     border-top: 0px;
     border-left: 0px;
@@ -97,16 +111,63 @@ background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' heigh
     border-style: solid;
     margin: 0px 0px 2rem 0px;
 }
+
 .subsection1{
     width: 14rem;
     height: 82%;
     background-color: transparent;
     position: relative;
-    left: 3rem;
-
-}
-.subsection1 .contactSection{
+    left: 2rem;
     display: flex;
     flex-direction: column;
-    background-color: grey;
+}
+.subsection1>*{
+    /* Adjusting this so elements don't collapse */
+    display: block;
+    margin-bottom: 1rem;
+}
+.subsection1 div{
+min-width: 12rem
+}
+.subsection1 .contactSection{
+    background-color: darkgray;
+}
+.bottomHalf h3{
+    padding-left:12px ;
+    padding-top: 4px;
+}
+.subsection1 .Interests{
+    padding-top: 10px;
+}
+.bottomHalf h3{
+    background-color: darkgray;
+    margin-bottom: 1rem;
+}
+.subsection2 {
+    /* Styling to match the screenshot */
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+    width: 100%;
+    padding-right: 2rem;
+}
+
+.subsection2 .subsections {
+    margin-bottom: 1.5rem;
+}
+
+.subsection2 .list-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.bottomHalf {
+    display: flex;
+    /* This makes the subsections align horizontally */
+    gap: 20px;
+    /* Optional: Adds space between the two subsections */
+}
+
+.textAreaEncloser{
+    background-color: #fff;
 }
