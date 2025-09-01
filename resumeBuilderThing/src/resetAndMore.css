@@ -87,14 +87,14 @@ background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' heigh
     display: flex;
     flex-direction: column;
 }
-#inputbox{
+.inputbox{
     font-family: "Google Sans Code";
     resize: both;
     position: absolute;
     width: 46vw;
     height: 20vh;
-    background-color:gainsboro;
-    bottom: 0;
+    background-color:white;
+    bottom: 0px;
     left: calc((100vw - 46vw)/2);
     border-radius: 20px;
     font-size: 2.5rem;
@@ -168,6 +168,3 @@ min-width: 12rem
     /* Optional: Adds space between the two subsections */
 }
 
-.textAreaEncloser{
-    background-color: #fff;
-}
