@@ -167,4 +167,22 @@ min-width: 12rem
     gap: 20px;
     /* Optional: Adds space between the two subsections */
 }
+.page>div>div>*:hover{
+    
+    font-size: 1.01rem;
+    background-color: whitesmoke;
 
+
+    animation: subtlePulse 1s infinite ease-in-out; 
+}
+@keyframes subtlePulse {
+    0% {
+        background-color: whitesmoke; /* Original color */
+    }
+    50% {
+        background-color: #f0f0f0; /* Slightly darker/cooler gray */
+    }
+    100% {
+        background-color: whitesmoke;
+    }
+}
