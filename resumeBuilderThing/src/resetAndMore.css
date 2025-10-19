@@ -70,119 +70,499 @@ li {
     width: 100vw;
     height: 100vh;
     display: flex; 
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='120' height='89' patternTransform='scale(3) rotate(30)'><rect x='0' y='0' width='100%' height='100%' fill='hsla(191,37.9%,94.3%,1)'/><path d='M-50.129 12.685C-33.346 12.358-16.786 4.918 0 5c16.787.082 43.213 10 60 10s43.213-9.918 60-10c16.786-.082 33.346 7.358 50.129 7.685'  stroke-width='3' stroke='hsla(0,4.4%,35.3%,1)' fill='none'/><path d='M-50.129 32.685C-33.346 32.358-16.786 24.918 0 25c16.787.082 43.213 10 60 10s43.213-9.918 60-10c16.786-.082 33.346 7.358 50.129 7.685'  stroke-width='3' stroke='hsla(185,59%,83.7%,1)' fill='none'/><path d='M-50.129 52.685C-33.346 52.358-16.786 44.918 0 45c16.787.082 43.213 10 60 10s43.213-9.918 60-10c16.786-.082 33.346 7.358 50.129 7.685'  stroke-width='3' stroke='hsla(224,22.5%,44.5%,1)' fill='none'/><path d='M-50.129 72.685C-33.346 72.358-16.786 64.918 0 65c16.787.082 43.213 10 60 10s43.213-9.918 60-10c16.786-.082 33.346 7.358 50.129 7.685'  stroke-width='3' stroke='hsla(188,35%,60.2%,1)' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(-300,-165)' fill='url(%23a)'/></svg>");
     opacity: 1;
+    position: relative;
+}
+
+.cardContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1500px;
+    flex: 1;
+}
+.styleToggle {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 25px 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 1000;
+    border: 1px solid rgba(100, 108, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.styleToggle h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.4rem;
+    text-align: center;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.5px;
+}
+
+.styleToggle button {
+    padding: 12px 24px;
+    border: 2px solid #ddd;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.05rem;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: #333;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.styleToggle button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(100, 108, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.styleToggle button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.styleToggle button:hover {
+    border-color: #646cff;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(100, 108, 255, 0.3);
+}
+
+.styleToggle button:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.styleToggle button.active {
+    background: linear-gradient(135deg, #646cff 0%, #4854ff 100%);
+    color: white;
+    border-color: #646cff;
+    box-shadow: 0 4px 15px rgba(100, 108, 255, 0.4);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(100, 108, 255, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(100, 108, 255, 0.6);
+    }
+}
+
+.controlToggle {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 25px 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 1000;
+    border: 1px solid rgba(255, 107, 107, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.controlToggle h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.4rem;
+    text-align: center;
+    font-weight: 700;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.5px;
+}
+
+.controlToggle button {
+    padding: 12px 24px;
+    border: 2px solid #ddd;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.05rem;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: #333;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.controlToggle button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(100, 108, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.controlToggle button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.controlToggle button:hover {
+    border-color: #646cff;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(100, 108, 255, 0.3);
+}
+
+.controlToggle button:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.controlToggle button.active {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    color: white;
+    border-color: #ff6b6b;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(255, 107, 107, 0.6);
+    }
+}
+
+.zoomControls, .rotateControls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+}
+
+.zoomControls label, .rotateControls label {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.zoomControls > div, .rotateControls > div {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.zoomControls button, .rotateControls button {
+    padding: 8px 16px;
+    font-size: 1.3rem;
+    min-width: 45px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+}
+
+.zoomControls button:hover, .rotateControls button:hover {
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
+}
+
+.zoomControls button:active, .rotateControls button:active {
+    transform: scale(0.95);
+}
+
+.zoomControls span, .rotateControls span {
+    min-width: 60px;
+    text-align: center;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #646cff;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 .page
 {   
     color: black;
-    position: relative;
-    top: 8px;
-    align-self: center;
     background-color: white;
-    height: 90vh;
-    width: 35vw;
-    /* Use flexbox for page sections */
+    width: 850px;
+    max-width: 850px;
+    height: 1100px;
+    max-height: 1100px;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    transform-style: preserve-3d;
 }
 .inputbox{
     font-family: "Google Sans Code";
     resize: both;
-    position: absolute;
-    width: 46vw;
-    height: 20vh;
-    background-color:white;
-    bottom: 0px;
-    left: calc((100vw - 46vw)/2);
-    border-radius: 20px;
-    font-size: 2.5rem;
+    position: fixed;
+    width: min(600px, 80vw);
+    height: 150px;
+    background-color: white;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 12px;
+    font-size: 1rem;
     color: black;
+    padding: 12px;
+    border: 2px solid #646cff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 999;
 }
 .topHalf{
     width: 100%;
-    padding: 15px 20px 10px;
-    border-top: 0px;
-    border-left: 0px;
-    border-right: 0px;
-    border-bottom: 2px;
-    border-color: black;
-    border-style: solid;
-    margin: 0px 0px 2rem 0px;
+    padding: 20px 25px;
+    border-bottom: 2px solid black;
+    flex-shrink: 0;
+}
+
+.topHalf h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.topHalf h3 {
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+.bottomHalf {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    flex: 1;
+    overflow: hidden;
 }
 
 .subsection1{
-    width: 14rem;
-    height: 82%;
+    min-width: 220px;
+    width: 30%;
     background-color: transparent;
-    position: relative;
-    left: 2rem;
     display: flex;
     flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
 }
 .subsection1>*{
-    /* Adjusting this so elements don't collapse */
     display: block;
-    margin-bottom: 1rem;
+    flex-shrink: 0;
 }
 .subsection1 div{
-min-width: 12rem
+    min-width: 180px;
+    font-size: 1.05rem;
 }
 .subsection1 .contactSection{
-    background-color: darkgray;
+    background-color: #e0e0e0;
+    padding: 12px;
 }
 .bottomHalf h3{
-    padding-left:12px ;
-    padding-top: 4px;
+    padding: 10px 14px;
+    background-color: #e0e0e0;
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 .subsection1 .Interests{
-    padding-top: 10px;
+    padding: 10px;
 }
-.bottomHalf h3{
-    background-color: darkgray;
-    margin-bottom: 1rem;
-}
+
 .subsection2 {
-    /* Styling to match the screenshot */
     display: flex;
     flex-direction: column;
-    padding-left: 15px;
-    width: 100%;
-    padding-right: 2rem;
+    flex: 1;
+    overflow-y: auto;
 }
 
 .subsection2 .subsections {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
+    flex-shrink: 0;
 }
 
 .subsection2 .list-items {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
 }
-.bottomHalf {
-    display: flex;
-    /* This makes the subsections align horizontally */
-    gap: 20px;
-    /* Optional: Adds space between the two subsections */
+
+.subsection2 .list-items li {
+    margin-bottom: 0.4rem;
 }
+
 .page>div>div>*:hover{
-    
-    font-size: 1.01rem;
     background-color: whitesmoke;
-
-
+    cursor: pointer;
     animation: subtlePulse 1s infinite ease-in-out; 
 }
+
 @keyframes subtlePulse {
     0% {
-        background-color: whitesmoke; /* Original color */
+        background-color: whitesmoke;
     }
     50% {
-        background-color: #f0f0f0; /* Slightly darker/cooler gray */
+        background-color: #f0f0f0;
     }
     100% {
         background-color: whitesmoke;
+    }
+}
+
+/* Scrollbar styling for overflow sections */
+.subsection1::-webkit-scrollbar,
+.subsection2::-webkit-scrollbar {
+    width: 6px;
+}
+
+.subsection1::-webkit-scrollbar-track,
+.subsection2::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.subsection1::-webkit-scrollbar-thumb,
+.subsection2::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.subsection1::-webkit-scrollbar-thumb:hover,
+.subsection2::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+/* Theme Styles */
+
+/* Classic Theme - Serif font, traditional colors */
+.page.classic {
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.page.classic .topHalf {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.page.classic .bottomHalf h3 {
+    background-color: #34495e;
+    color: white;
+}
+
+.page.classic .subsection1 .contactSection {
+    background-color: #34495e;
+    color: white;
+}
+
+/* Minimal Theme - Clean, lots of white space */
+.page.minimal {
+    font-family: 'Helvetica Neue', 'Arial', sans-serif;
+}
+
+.page.minimal .topHalf {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.page.minimal .bottomHalf h3 {
+    background-color: transparent;
+    border-bottom: 2px solid #333;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+}
+
+.page.minimal .subsection1 .contactSection {
+    background-color: #fafafa;
+    border-left: 4px solid #333;
+}
+
+/* Modern Theme - Default/current styling */
+.page.modern {
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .page {
+        width: 700px;
+        height: 900px;
+    }
+    
+    .cardContainer {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .styleToggle, .controlToggle {
+        left: 10px;
+        right: 10px;
+        padding: 15px 10px;
+        top: auto;
+        bottom: 180px;
+        transform: none;
+    }
+    
+    .controlToggle {
+        left: auto;
+        right: 10px;
+    }
+    
+    .styleToggle h4, .controlToggle h4 {
+        font-size: 1rem;
+    }
+    
+    .styleToggle button, .controlToggle button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .page {
+        width: 90vw;
+        height: 70vh;
+    }
+    
+    .inputbox {
+        height: 120px;
+        font-size: 0.9rem;
     }
 }
